@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+
+<!-- title here -->
+{% block title %}
+    User | Dashboard
+{% endblock %}
+
+<!-- custom css -->
+{% block custom_css %}
+<style>
+    body {
+        background-color: rgb(32, 32, 32);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+<!-- body content -->
+{% block body_content %}
+<div class="container-lg">
+    <h1>{{ welcome_msg }}</h1>
+</div>
+{% endblock %}
+
+<!-- custom js -->
+{% block custom_js %}
+<script>
+    alert("Welcome to information tracker");
+</script>
+{% endblock %}
