@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+
+<!-- title here -->
+{% block title %}
+    User | Profile
+{% endblock %}
+
+<!-- custom css -->
+{% block custom_css %}
+<style>
+    body, .card {
+        background-color: rgb(202, 202, 202);
+        color: rgb(64, 64, 64);
+    }
+</style>
+{% endblock %}
+
+<!-- body content -->
+{% block body_content %}
+<div class="container-lg">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>User Profile</h3>
+        </div>
+        {% if msg_success %}
+        <div class="alert alert-success" role="alert">
+            {{ msg_success }}
+        </div>
+        {% endif %}
+        <div class="card-body">
+            <h3>{{ db_data.first_name }} {{ db_data.middle_name }} {{ db_data.last_name }}</h3>
+            <h5>{{ db_data.email }}</h5>
+            <h5>{{ db_data.contact }}</h5>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'user.edit' 13 %}">Edit</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

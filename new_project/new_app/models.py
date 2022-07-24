@@ -14,6 +14,9 @@ class StudentDetail(models.Model):
 
     class Meta:
         db_table = "student_detail"
+        
+    def __str__(self):
+        return self.first_name    
 
 class AcademicDetail(models.Model):
     org_name = models.CharField(max_length=200)

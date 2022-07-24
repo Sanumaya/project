@@ -1,0 +1,56 @@
+{% extends "layouts/base.html" %}
+
+<!-- title here -->
+{% block title %}
+    User | Edit
+{% endblock %}
+
+<!-- custom css -->
+{% block custom_css %}
+<style>
+    body, .card {
+        background-color: rgb(202, 202, 202);
+        color: rgb(64, 64, 64);
+    }
+</style>
+{% endblock %}
+
+<!-- body content -->
+{% block body_content %}
+<div class="container-lg">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>User Update</h3>
+        </div>
+        <div class="card-body">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-2">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{ db_data.first_name }}">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" name="middle_name" class="form-control" value="{{ db_data.middle_name }}">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" value="{{ db_data.last_name }}">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="form-control" value="{{ db_data.email }}">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="contact">Contact</label>
+                    <input type="text" name="contact" class="form-control" value="{{ db_data.contact }}">
+                </div>
+                <input type="submit" class="btn btn-primary text-uppercase" value="update">
+            </form>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'user.profile' 13 %}">Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
