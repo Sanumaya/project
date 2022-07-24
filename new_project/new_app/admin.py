@@ -8,6 +8,6 @@ admin.site.register(AcademicDetail)
 admin.site.register(TrainingDetail)
 
 admin.site.app_index = "App_Project"
-admin.site.site_header = "App_Project"
+admin.site.site_header = "Project Admin"
 admin.site.site_title = "Admin"
 admin.site.index_title = "App_Project"

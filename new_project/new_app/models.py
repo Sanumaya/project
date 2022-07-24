@@ -33,7 +33,7 @@ class AcademicDetail(models.Model):
 
 class TrainingDetail(models.Model):
     org_name = models.CharField(max_length=200)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     category = models.CharField(max_length=200)
     duration = models.CharField(max_length=100)
     start_date = models.DateField()

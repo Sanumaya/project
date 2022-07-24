@@ -1,8 +1,10 @@
 from multiprocessing import context
 import re
+from urllib import request
 from django.shortcuts import render
 import random
 import string
+
 
 from django.core.mail import send_mail
 # importing forms classes
@@ -17,10 +19,17 @@ def generate_random_string(str_size, allowed_chars):
     return ''.join(random.choice(allowed_chars) for x in range(str_size))
 
 def user_dashboard(request):
+    login_form = StudentLoginForm()
     context = {
         "welcome_msg": "Welcome to Information Tracker",
+        "form": login_form,
     }
-    return render(request, "users/dashboard.html", context) 
+    if request.session.has_key('session_id'):
+        return render(request, "users/dashboard.html")
+    else:
+        context.setdefault("msg_error", "Invalid email or password!!")
+        return render(request, "users/login.html", context)
+
 
 def user_profile(request, user_id):
    data = StudentDetail.objects.get(id = user_id)
@@ -55,7 +64,11 @@ def user_login(request):
         try:
             std_data = StudentDetail.objects.get(email=req_email)
             if std_data.password == req_password:
-                return render(request, "users/dashboard.html")
+                #storing session
+               request.session['session_id'] = std_data.id
+               #checking session
+               if request.session.has_key('session_id'):
+                  return render(request, "users/dashboard.html")
             else:
                 context.setdefault("msg_error", "Invalid email or password!!")
                 return render(request, "users/login.html", context)
@@ -64,8 +77,18 @@ def user_login(request):
             return render(request, "users/login.html")
     else:
         return render(request, "users/login.html", context)
+    
+def user_logout(request):
+    if request.session.has_key('session_id'):
+        login_form = StudentLoginForm()
+        context = {"form": login_form, }
 
+        # destroying session
+        del request.session['session_id']
 
+        context.setdefault("msg_error", "Please login!!")
+        return render(request, "users/login.html", context)    
+    
 def user_register(request):
     reg_form = StudentDetailForm()
     context = {

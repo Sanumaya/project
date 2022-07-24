@@ -9,7 +9,6 @@
 {% block custom_css %}
 <style>
     body {
-        background-color: rgb(32, 32, 32);
         color: white;
     }
 </style>
@@ -19,12 +18,13 @@
 {% block body_content %}
 <div class="container-lg">
     <h1>{{ welcome_msg }}</h1>
+    <img src="/static/images/test.jpg" alt="">
 </div>
 {% endblock %}
 
 <!-- custom js -->
+{% load static %}
 {% block custom_js %}
-<script>
-    alert("Welcome to information tracker");
-</script>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
+

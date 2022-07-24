@@ -22,7 +22,7 @@
                 </div>
                 {% endif %}
                 <div class="card-body">
-                    <form action="#" method="POST">
+                    <form action="{% url 'user.login'%}" method="POST">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <input type="submit" class="btn btn-primary text-uppercase" value="login">

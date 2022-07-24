@@ -17,7 +17,7 @@
                     <h3>User Login</h3>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST">
+                    <form action="{% url 'user.register' %}" method="POST">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <input type="submit" class="btn btn-primary text-uppercase" value="register">
