@@ -7,13 +7,36 @@ import string
 
 
 from django.core.mail import send_mail
+
+from new_app import serializers
 # importing forms classes
 from .forms import StudentDetailForm, StudentLoginForm
 
 # importing models
 from .models import StudentDetail
 
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+
 # Create your views here.
+class StudentDetailApiView(APIView):
+    def get(self, request):
+        students = StudentDetail.objects.all()
+        serializer = serializers.StudentDetailSerializer(students, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        data_set = request.data
+        serializer = serializers.StudentDetailSerializer(data=data_set)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
 
 def generate_random_string(str_size, allowed_chars):
     return ''.join(random.choice(allowed_chars) for x in range(str_size))
